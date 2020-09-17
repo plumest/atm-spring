@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label for="inputCustomerID">Customer ID</label>
-            <input type="input" class="form-control" name="customerid" id="inputCustomerID">
+            <input type="input" class="form-control" name="customerId" id="inputCustomerID">
         </div>
 
         <div class="form-group">
@@ -44,7 +44,7 @@
         </thead>
 
         <tbody>
-        <tr th:each="account : ${allAccounts}">
+        <tr th:each="account : ${allBankAccounts}">
             <td th:text="${account.id}"></td>
             <td th:text="${account.customerId}"></td>
             <td th:text="${account.type}"></td>
