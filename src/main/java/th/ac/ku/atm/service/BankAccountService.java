@@ -19,17 +19,6 @@ public class BankAccountService {
         this.restTemplate = restTemplate;
     }
 
-    public List<BankAccount> getCustomerBankAccount(int customerId) {
-        String url = "http://localhost:8091/api/bankaccount/customer/" +
-                customerId;
-        ResponseEntity<BankAccount[]> response =
-                restTemplate.getForEntity(url, BankAccount[].class);
-
-        BankAccount[] accounts = response.getBody();
-
-        return Arrays.asList(accounts);
-    }
-
     public List<BankAccount> getBankAccounts() {
         String url = "http://localhost:8091/api/bankaccount/";
         ResponseEntity<BankAccount[]> response = restTemplate.getForEntity(url, BankAccount[].class);
@@ -39,7 +28,20 @@ public class BankAccountService {
         return Arrays.asList(accounts);
     }
 
-    public void createBankAccount(BankAccount bankAccount) {
-        // Nothing for now
+    public void openAccount(BankAccount bankAccount) {
+        String url = "http://localhost:8091/api/bankaccount";
+
+        restTemplate.postForObject(url, bankAccount, BankAccount.class);
+    }
+
+    public List<BankAccount> getCustomerBankAccount(int customerId) {
+        String url = "http://localhost:8091/api/bankaccount/customer/" +
+                customerId;
+        ResponseEntity<BankAccount[]> response =
+                restTemplate.getForEntity(url, BankAccount[].class);
+
+        BankAccount[] accounts = response.getBody();
+
+        return Arrays.asList(accounts);
     }
 }
