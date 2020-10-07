@@ -28,6 +28,14 @@ public class BankAccountController {
         return "redirect:bankaccount";
     }
 
+    @PostMapping("/delete/{id}")
+    public String deleteAccount(@PathVariable int id,
+                                Model model) {
+        accountService.deleteBankAccount(id);
+        model.addAttribute("allBankAccounts",accountService.getBankAccounts());
+        return "redirect:/bankaccount";
+    }
+
     @GetMapping("/edit/{id}")
     public String getEditBankAccountPage(@PathVariable int id, Model model) {
         BankAccount account = accountService.getBankAccount(id);
@@ -39,7 +47,6 @@ public class BankAccountController {
     public String editAccount(@PathVariable int id,
                               @ModelAttribute BankAccount bankAccount,
                               Model model) {
-
         accountService.editBankAccount(bankAccount);
         model.addAttribute("allBankAccounts",accountService.getBankAccounts());
         return "redirect:/bankaccount";
