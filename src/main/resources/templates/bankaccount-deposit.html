@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}"
+      xmlns:th="https://www.thymeleaf.org">
+
+<div class="container" layout:fragment="content">
+    <h1>Deposit Bank Account</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-light">
+        <tr>
+            <th>Id</th>
+            <th>CustomerId</th>
+            <th>Type</th>
+            <th>Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:object="${bankAccount}">
+            <td th:text="${bankAccount.id}"></td>
+            <td th:text="${bankAccount.customerId}"></td>
+            <td th:text="${bankAccount.type}"></td>
+            <td th:text="${bankAccount.balance}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form
+            th:action="@{/bankaccount/deposit/{id}(id=${bankAccount.id})}"
+            th:object="${bankAccount}"
+            method="POST">
+
+        <div class="form-group">
+            <label for="inputBalance">Deposit</label>
+            <input type="text" name="balance" class="form-control" id="inputBalance">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary">
+        </div>
+
+    </form>
+</div>
